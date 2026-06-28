@@ -3,27 +3,17 @@ import { createContext, useContext, useEffect, useState, useCallback } from 'rea
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
-  // ── Theme ──────────────────────────────────────────────────────────────
-  const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem('mf-theme');
-    return saved || 'dark';
-  });
+  // ── Theme (Locked to Dark Mode) ────────────────────────────────────────
+  const theme = 'dark';
+  const toggleTheme = useCallback(() => {}, []);
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-    localStorage.setItem('mf-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = useCallback(() => {
-    setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+    root.classList.add('dark');
+    localStorage.setItem('mf-theme', 'dark');
   }, []);
 
-  // ── Watchlist ──────────────────────────────────────────────────────────
+  // ── Favorites (Watchlist) ──────────────────────────────────────────────
   const [watchlist, setWatchlist] = useState(() => {
     try {
       const stored = localStorage.getItem('mf-watchlist');
@@ -40,7 +30,8 @@ export function AppProvider({ children }) {
   const addToWatchlist = useCallback((movie) => {
     setWatchlist((prev) => {
       if (prev.find((m) => m.id === movie.id)) return prev;
-      return [...prev, movie];
+      // Add a timestamp to support sorting in Favorites page
+      return [...prev, { ...movie, addedAt: new Date().toISOString() }];
     });
   }, []);
 
@@ -53,31 +44,27 @@ export function AppProvider({ children }) {
     [watchlist]
   );
 
-  // ── Search & Filters ───────────────────────────────────────────────────
+  // ── Search ─────────────────────────────────────────────────────────────
   const [searchQuery, setSearchQuery] = useState('');
-  const [filters, setFilters] = useState({ genre: '', year: '', minRating: '' });
-  const [selectedMovie, setSelectedMovie] = useState(null);
-
-  const clearFilters = useCallback(() => {
-    setFilters({ genre: '', year: '', minRating: '' });
-  }, []);
 
   return (
     <AppContext.Provider
       value={{
         theme,
         toggleTheme,
+        // Expose watchlist API (for backwards compatibility)
         watchlist,
         addToWatchlist,
         removeFromWatchlist,
         isInWatchlist,
+        // Expose favorites API (for new features)
+        favorites: watchlist,
+        addToFavorites: addToWatchlist,
+        removeFromFavorites: removeFromWatchlist,
+        isInFavorites: isInWatchlist,
+        
         searchQuery,
         setSearchQuery,
-        filters,
-        setFilters,
-        clearFilters,
-        selectedMovie,
-        setSelectedMovie,
       }}
     >
       {children}

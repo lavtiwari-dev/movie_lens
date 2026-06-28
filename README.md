@@ -1,170 +1,88 @@
-# MovieFinder
+# MovieLens — Discover Movies & Ratings
 
-MovieFinder is a responsive movie discovery application built with React and Vite. It uses the [OMDb API](https://www.omdbapi.com/) to load a curated set of featured films, search for movies by title, show detailed IMDb metadata, and maintain a browser-local watchlist.
-
-The repository directory is named `MovieLens`, while the product name shown in the interface is **MovieFinder**.
+MovieLens is a modern, premium, dark-themed movie discovery website built with React, Vite, and Tailwind CSS. Inspired by the aesthetics of Netflix, IMDb, and Letterboxd, the interface features glassmorphism panels, soft glowing borders, neon highlights, and premium micro-animations (card lifts, rating glows, and theme toggle rotations). It integrates with the live [OMDb API](https://www.omdbapi.com/) to offer comprehensive search, detailed reviews, charts, catalog paging, and a local favorites database.
 
 ## Features
 
-- Curated home page with 16 popular and highly rated films
-- Debounced title search backed by OMDb
-- Optional release-year search filter
-- Detailed movie modal with plot, rating, runtime, genres, director, cast, awards, certification, and box office data
-- Add/remove watchlist controls on cards and in the details modal
-- Persistent watchlist and theme preference through `localStorage`
-- Light and dark themes
-- Responsive grid, loading skeletons, poster fallbacks, and empty states
-- Keyboard support for opening cards, clearing search with <kbd>Esc</kbd>, and closing the details modal with <kbd>Esc</kbd>
+- **Double-Column Hero Banner**: Split layout featuring a popular search tags row and a large glassmorphic Featured Movie card (e.g. *The Dark Knight*) with quick-view and trailer triggers.
+- **Cinematic Visual Theme**: Pure CSS variable styling support for:
+  - Dark background (`#070B14`) and card backdrops (`#101827`).
+  - Glowing yellow accent highlights (`#FFC107`) and CTA buttons in purple (`#6C5CE7`).
+  - Soft glowing hover behaviors, card lifts, and poster image zoom transitions.
+  - A circular rotating Light/Dark mode switcher.
+- **Multi-Filter Movies Page**: Search with dedicated dropdown filters for Genre, Year, IMDb score thresholds, and client-side sorting (IMDb score, release date, alphabetical).
+- **IMDb Top Rated Page**: Ranked chart listing complete with ranking position badges (`#1`, `#2`) and a "Top 250" hover indicator.
+- **Genres Catalog**: Beautiful visual cards for 10 cinematic genres, using responsive cover pictures and simulated movie count stats.
+- **Dynamic Search Page**: Displays paginated matching grids or a clean "No movies found." vector empty state.
+- **Favorites Page (Watchlist)**: Browser local-storage based personal list featuring custom sorting options (Recently Added, Highest Rated, Alphabetical) and quick delete shortcuts.
+- **Movie Details Page**: Immersive profile page showing a blurred poster backdrop overlay, spec grids (director, cast, box office, awards, country, language), ratings metrics from IMDb, Rotten Tomatoes, and Metacritic, and a Related Movies Carousel based on primary genres.
+- **About Page**: Mission details, technology logs, contact support mailers, and custom graphic blocks.
 
 ## Tech Stack
 
-| Area | Technology |
+| Component | Technology |
 | --- | --- |
-| UI | React 19, JSX |
-| Build tooling | Vite 8 |
-| Routing | React Router 7 |
-| API client | Axios |
-| Styling | Tailwind CSS 3, PostCSS, custom CSS variables |
-| Icons | Heroicons |
-| Linting | Oxlint |
-| Movie data | OMDb API |
+| **Framework** | React 19 (Hooks, Context, JSX) |
+| **Bundler & Tooling** | Vite 8 |
+| **Navigation Routing** | React Router 7 |
+| **API Requests** | Axios |
+| **Styling Engine** | Tailwind CSS 3 & PostCSS |
+| **Typography** | Poppins (via Google Fonts) |
+| **Icon Libraries** | `@heroicons/react` |
+| **Static Linter** | Oxlint |
+| **Data Provider** | OMDb API |
 
 ## Prerequisites
 
-Before starting, install:
+Before building or running locally, make sure you have installed:
 
-- [Node.js](https://nodejs.org/) `20.19+` or `22.12+` (the minimum versions required by Vite 8)
-- npm (included with Node.js)
-- A free or paid [OMDb API key](https://www.omdbapi.com/apikey.aspx)
+- [Node.js](https://nodejs.org/) `20.19+` or `22.12+` (Vite 8 requirement)
+- npm (installed with Node.js)
+- An [OMDb API key](https://www.omdbapi.com/apikey.aspx)
 
 ## Getting Started
 
-1. Clone the repository and enter the project directory:
-
+1. Clone the repository and navigate to the folder:
    ```bash
    git clone <repository-url>
    cd MovieLens
    ```
 
-2. Install the locked dependencies:
-
+2. Install dependencies:
    ```bash
-   npm ci
+   npm install
    ```
 
-3. Create a local environment file from the supplied template:
-
+3. Create the environment configuration file:
    ```bash
    cp .env.example .env
    ```
 
-4. Add your OMDb API key to `.env`:
-
+4. Edit the `.env` file to insert your API key:
    ```dotenv
-   VITE_OMDB_API_KEY=your_omdb_api_key_here
+   VITE_OMDB_API_KEY=976a7512
    VITE_OMDB_BASE_URL=https://www.omdbapi.com
    ```
 
-5. Start the development server:
-
+5. Launch the local hot-rebuilding server:
    ```bash
    npm run dev
    ```
 
-6. Open the local URL printed by Vite, normally `http://localhost:5173`.
+6. Open the Vite local server link in your browser, usually: `http://localhost:5173`.
 
-Vite reads environment variables when the server starts. Restart the development server after changing `.env`.
-
-## Environment Variables
-
-| Variable | Required | Default | Purpose |
-| --- | --- | --- | --- |
-| `VITE_OMDB_API_KEY` | Yes | None | Authenticates browser requests to OMDb. |
-| `VITE_OMDB_BASE_URL` | No | `https://www.omdbapi.com` | Overrides the OMDb endpoint, useful when routing requests through a compatible proxy. |
-
-Only variables prefixed with `VITE_` are exposed to client-side code. Consequently, the OMDb key is included in the production JavaScript bundle and should not be treated as a secret. For tighter key control, route OMDb requests through a server-side API or edge function and restrict that endpoint appropriately.
-
-The checked-in `.gitignore` excludes `.env`, `.env.local`, and environment-specific local files. Do not commit real credentials.
+---
 
 ## Available Commands
 
 | Command | Description |
 | --- | --- |
-| `npm run dev` | Starts Vite with hot module replacement. |
-| `npm run build` | Creates an optimized production bundle in `dist/`. |
-| `npm run preview` | Serves the production bundle locally for a final check. |
-| `npm run lint` | Runs Oxlint against the project. |
+| `npm run dev` | Runs the local hot-reload dev server. |
+| `npm run build` | Builds optimized production assets in `dist/`. |
+| `npm run preview` | Runs a local server to test production builds. |
+| `npm run lint` | Runs static analysis and linter rules (Oxlint). |
 
-A typical pre-commit check is:
-
-```bash
-npm run lint
-npm run build
-```
-
-## How the Application Works
-
-### Routes
-
-| Route | Page | Behavior |
-| --- | --- | --- |
-| `/` | Home | Shows featured movies, search, filters, and movie details. |
-| `/watchlist` | Watchlist | Shows the movies saved in the current browser. |
-
-`BrowserRouter` provides client-side routing. A production host must serve `index.html` as a fallback for unknown paths so that opening `/watchlist` directly does not return a server 404.
-
-### Data flow
-
-1. `main.jsx` mounts the React application.
-2. `App.jsx` wraps all routes in `AppProvider` and renders the shared navigation.
-3. On the home page, `getFeaturedMovies()` requests full details for a fixed set of IMDb IDs.
-4. Search input is trimmed and debounced for 350 ms. Queries shorter than two characters continue to show featured content.
-5. `searchMovies()` calls OMDb's `s` endpoint with `type=movie`, the first result page, and an optional `y` value.
-6. Selecting a card calls `getMovieDetails()` with its IMDb ID and requests the full plot.
-7. The API module normalizes OMDb's capitalized fields into one consistent shape used by the components.
-8. Theme and watchlist updates flow through React context and are synchronized to `localStorage`.
-
-### OMDb requests
-
-The application makes three kinds of requests:
-
-```text
-Featured: GET /?apikey=<key>&i=<imdb-id>&plot=full
-Search:   GET /?apikey=<key>&s=<query>&type=movie&page=1[&y=<year>]
-Details:  GET /?apikey=<key>&i=<imdb-id>&plot=full
-```
-
-Featured movies are fetched concurrently. Failed entries are skipped with `Promise.allSettled`, allowing the rest of the featured grid to render.
-
-Search results contain only summary fields. Rating, plot, genres, cast, director, runtime, awards, and box office data become available after the detail request succeeds.
-
-### Normalized movie model
-
-Components consume normalized objects rather than raw OMDb responses. Important fields include:
-
-| Field | Meaning |
-| --- | --- |
-| `id`, `imdbID` | IMDb title identifier used for keys, detail requests, and watchlist deduplication |
-| `title` | Display title |
-| `posterUrl` | Direct OMDb poster URL, or `null` when unavailable |
-| `year`, `release_date` | Normalized release information |
-| `vote_average` | Numeric IMDb rating, available in detail responses |
-| `overview` | Full OMDb plot |
-| `genres` | Array of `{ name }` objects |
-| `runtime` | Runtime in minutes |
-| `director`, `actors` | Credits shown in the modal |
-| `rated`, `country`, `awards`, `boxOffice` | Additional detail metadata |
-
-### Browser persistence
-
-No account or backend database is used. Data is scoped to the current browser and origin.
-
-| Storage key | Value |
-| --- | --- |
-| `mf-theme` | `dark` or `light` |
-| `mf-watchlist` | JSON array of normalized movie objects |
-
-Clearing site data, using another browser, or changing the deployment origin results in a separate watchlist. Corrupt watchlist JSON is safely treated as an empty list.
+---
 
 ## Project Structure
 
@@ -175,98 +93,41 @@ MovieLens/
 │   └── icons.svg
 ├── src/
 │   ├── api/
-│   │   └── omdb.js             # Axios client, API functions, normalization
-│   ├── assets/                 # Static source assets
+│   │   └── omdb.js             # Axios client, normalized models, batch loaders
+│   ├── assets/                 # Vector resources
 │   ├── components/
-│   │   ├── Filters.jsx         # Filter popover and controls
-│   │   ├── Loader.jsx          # Movie-card skeleton grid
-│   │   ├── MovieCard.jsx       # Poster card and watchlist controls
-│   │   ├── MovieGrid.jsx       # Movie collection and empty state
-│   │   ├── MovieModal.jsx      # Full OMDb details dialog
-│   │   ├── Navbar.jsx          # Routes, watchlist count, theme toggle
-│   │   └── SearchBar.jsx       # Debounced controlled search input
+│   │   ├── Footer.jsx          # 4-column footer
+│   │   ├── Loader.jsx          # Skeleton animation layout
+│   │   ├── MovieCard.jsx       # Custom card with lifts, glows, and badges
+│   │   ├── Navbar.jsx          # Sticky glassmorphic navbar with mobile drawer
+│   │   └── TrailerModal.jsx    # Cinema-iframe trailer player modal
 │   ├── context/
-│   │   └── AppContext.jsx      # Shared theme, watchlist, search, filters
+│   │   └── AppContext.jsx      # Theme, Favorites, and Search state providers
 │   ├── pages/
-│   │   ├── Home.jsx            # Discovery and search page
-│   │   └── Watchlist.jsx       # Saved movies page
-│   ├── App.jsx                 # Provider, router, and routes
-│   ├── index.css               # Tailwind layers and application styles
-│   └── main.jsx                # Browser entry point
+│   │   ├── About.jsx           # Mission statement and contacts page
+│   │   ├── Favorites.jsx       # Saved bookmarks page with sorting filters
+│   │   ├── Genres.jsx          # Category grid cards page
+│   │   ├── Home.jsx            # Split Hero, trending and latest previews page
+│   │   ├── MovieDetails.jsx    # Complete reviews, details, and related carousel
+│   │   ├── Movies.jsx          # Catalog grids with pagination
+│   │   ├── SearchResults.jsx   # Paginated search matches page
+│   │   └── TopRated.jsx        # Ranked chart indices page
+│   ├── App.jsx                 # Routes map and provider wrapper
+│   ├── index.css               # Google Font loading, variable themes, and animations
+│   └── main.jsx                # Browser mounting point
 ├── .env.example
-├── .oxlintrc.json
 ├── index.html
 ├── package.json
-├── postcss.config.js
-├── tailwind.config.js
 └── vite.config.js
 ```
 
-## Styling and Themes
+---
 
-Tailwind scans `index.html` and all source JavaScript/TypeScript files. Most application-specific rules live in `src/index.css`; Tailwind utility classes are used primarily for icon dimensions and a few layout details.
+## Local Storage Mappings
 
-Theme colors are CSS custom properties. Dark mode is the default, and `AppProvider` adds or removes the `dark` class on `<html>`. The selected preference is restored from `mf-theme` on the next visit.
+Local storage is utilized to save client configuration preferences:
 
-The Inter font is loaded from Google Fonts, while missing posters use a remote `placehold.co` image. Those resources may not render when the browser is offline or blocks third-party assets.
-
-## Current Limitations
-
-- OMDb search returns at most 10 titles per page; the UI currently requests only page 1 and has no pagination.
-- Search uses OMDb's title-search parameter. Despite the broad input placeholder, director and genre searches are not supported by the API call.
-- The genre and minimum-rating controls are present, but the current home-page selection logic does not apply them to rendered results. Search summaries also lack genre and rating fields, so supporting these filters requires fetching details for candidate titles or filtering a detail-rich data set.
-- The year filter is sent to OMDb only when there is an active title query; selecting a year without a search does not request a year-wide listing.
-- API failures are converted to empty result states in several components instead of displaying the underlying error or retry controls.
-- The watchlist is local-only and is not synchronized between browsers or devices.
-- There is currently no automated test suite.
-- Featured loading can consume multiple OMDb requests on each home-page mount because all curated titles are fetched individually and no response cache is implemented.
-
-## Production Build and Deployment
-
-Create and test the production bundle locally:
-
-```bash
-npm run build
-npm run preview
-```
-
-Deploy the generated `dist/` directory to any static host that supports SPA fallback routing, such as Netlify, Vercel, Cloudflare Pages, GitHub Pages with an appropriate fallback, or an Nginx/Apache server.
-
-Configure `VITE_OMDB_API_KEY` in the hosting provider's build environment before running `npm run build`. Environment values are embedded at build time; changing them requires a new build.
-
-For a subpath deployment such as `https://example.com/movie-finder/`, configure Vite's `base` option and ensure React Router receives compatible routing behavior.
-
-## Troubleshooting
-
-### Featured movies or searches are empty
-
-- Confirm `VITE_OMDB_API_KEY` is set to an active key.
-- Restart Vite after editing `.env`.
-- Inspect the browser Network panel for OMDb responses such as `Invalid API key!` or request-limit errors.
-- Verify that the browser can reach `https://www.omdbapi.com`.
-
-### Search does not start immediately
-
-This is expected: the input waits 350 ms after typing stops, and a query must contain at least two trimmed characters.
-
-### A direct visit to `/watchlist` returns 404 after deployment
-
-Configure the host to rewrite unknown requests to `/index.html`. Vite's local server already handles this during development.
-
-### Posters show placeholders
-
-OMDb sometimes returns no poster or an inaccessible remote image. `MovieCard` and `MovieModal` intentionally fall back to a placeholder in either case.
-
-### The watchlist disappeared
-
-The watchlist is stored only in browser `localStorage`. Check that you are using the same browser profile, protocol, hostname, and port, and that site data has not been cleared.
-
-## Extending the Project
-
-Good next additions include pagination, response caching, visible API error states, accessible focus trapping in the modal, detail-backed genre/rating filters, automated component tests, and optional account-based watchlist synchronization.
-
-When adding shared state, expose it through `AppContext`. Keep raw OMDb field conversion inside `src/api/omdb.js` so UI components continue to receive a stable application model.
-
-## License
-
-No license file is currently included. Unless the repository owner adds one, the source code remains under the owner's default copyright rights.
+| Key | Format | Purpose |
+| --- | --- | --- |
+| `mf-theme` | `dark` / `light` | Saves selection for theme toggling. |
+| `mf-watchlist` | JSON Array | Saves favorite bookmarked movie structures. |
