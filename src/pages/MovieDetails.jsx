@@ -132,7 +132,7 @@ export default function MovieDetails() {
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
           
           {/* Left Column: Poster & Buttons */}
-          <div className="w-48 sm:w-60 md:w-72 shrink-0 mx-auto lg:mx-0 flex flex-col gap-4">
+          <div className="w-52 sm:w-60 md:w-72 shrink-0 mx-auto lg:mx-0 flex flex-col gap-4">
             <div className="w-full aspect-[2/3] rounded-xl overflow-hidden shadow-xl border border-brand-border bg-brand-card">
               <img
                 src={posterUrl}
@@ -241,27 +241,27 @@ export default function MovieDetails() {
 
             {/* Specifications Grid */}
             <div className="border border-brand-border rounded-xl p-4 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-[11px] font-semibold text-brand-gray bg-brand-card/30">
-              <div className="flex justify-between border-b border-white/5 pb-1.5">
+              <div className="flex flex-col sm:flex-row sm:justify-between border-b border-white/5 pb-1.5 gap-0.5 sm:gap-4">
                 <span className="text-brand-muted">Director</span>
                 <span className="text-brand-primary text-right font-normal">{movie.director}</span>
               </div>
-              <div className="flex justify-between border-b border-white/5 pb-1.5">
+              <div className="flex flex-col sm:flex-row sm:justify-between border-b border-white/5 pb-1.5 gap-0.5 sm:gap-4">
                 <span className="text-brand-muted">Writer</span>
                 <span className="text-brand-primary text-right font-normal">{movie.writer}</span>
               </div>
-              <div className="flex justify-between border-b border-white/5 pb-1.5">
+              <div className="flex flex-col sm:flex-row sm:justify-between border-b border-white/5 pb-1.5 gap-0.5 sm:gap-4">
                 <span className="text-brand-muted">Box Office</span>
                 <span className="text-brand-yellow font-semibold text-right">{movie.boxOffice || 'N/A'}</span>
               </div>
-              <div className="flex justify-between border-b border-white/5 pb-1.5">
+              <div className="flex flex-col sm:flex-row sm:justify-between border-b border-white/5 pb-1.5 gap-0.5 sm:gap-4">
                 <span className="text-brand-muted">Awards</span>
                 <span className="text-brand-primary text-right font-normal">{movie.awards || 'None'}</span>
               </div>
-              <div className="flex justify-between border-b border-white/5 pb-1.5 md:border-none md:pb-0">
+              <div className="flex flex-col sm:flex-row sm:justify-between border-b border-white/5 pb-1.5 md:border-none md:pb-0 gap-0.5 sm:gap-4">
                 <span className="text-brand-muted">Country</span>
                 <span className="text-brand-primary text-right font-normal">{movie.country}</span>
               </div>
-              <div className="flex justify-between">
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-0.5 sm:gap-4">
                 <span className="text-brand-muted">Production</span>
                 <span className="text-brand-primary text-right font-normal">{movie.production || 'N/A'}</span>
               </div>

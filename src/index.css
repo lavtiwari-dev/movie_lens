@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 /* ── DESIGN SYSTEM VARIABLES ── */
 :root {
@@ -66,7 +66,26 @@ html:not(.dark) {
   padding: 0;
 }
 
-body {
+html {
+  font-size: 15px;
+}
+@media (min-width: 640px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media (min-width: 1024px) {
+  html {
+    font-size: 17px;
+  }
+}
+@media (min-width: 1440px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+html, body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -104,6 +123,12 @@ h1, h2, h3, h4, h5, h6 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
+}
+
+@media (min-width: 320px) {
+  .movie-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 @media (min-width: 640px) {
   .movie-grid {
@@ -144,8 +169,8 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   left: 50%;
   bottom: -4px;
-  width: 16px;
-  height: 1.5px;
+  width: 24px;
+  height: 2.5px;
   background-color: var(--accent-yellow);
   transform: translateX(-50%) scaleX(0);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -155,7 +180,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .nav-underline-btn-active {
   font-weight: 600;
-  color: var(--text-primary) !important;
+  color: var(--accent-yellow) !important;
 }
 .nav-underline-btn-active::after {
   transform: translateX(-50%) scaleX(1);

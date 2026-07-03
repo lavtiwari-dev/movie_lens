@@ -63,12 +63,12 @@ export default function Home() {
 
   // Curated genres for landing preview (6 cards)
   const homeGenres = [
-    { name: 'Action', count: '1.2K+ Movies', gradient: 'from-red-950/30 to-neutral-950/90', bg: 'https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?w=500&auto=format&fit=crop&q=60' },
-    { name: 'Comedy', count: '980+ Movies', gradient: 'from-amber-950/30 to-neutral-950/90', bg: 'https://images.unsplash.com/photo-1514306191717-452ec28c7814?w=500&auto=format&fit=crop&q=60' },
-    { name: 'Adventure', count: '850+ Movies', gradient: 'from-emerald-950/30 to-neutral-950/90', bg: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=500&auto=format&fit=crop&q=60' },
-    { name: 'Sci-Fi', count: '740+ Movies', gradient: 'from-blue-950/30 to-neutral-950/90', bg: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&auto=format&fit=crop&q=60' },
-    { name: 'Animation', count: '620+ Movies', gradient: 'from-pink-950/30 to-neutral-950/90', bg: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500&auto=format&fit=crop&q=60' },
-    { name: 'Horror', count: '450+ Movies', gradient: 'from-purple-950/40 to-neutral-950/90', bg: 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=500&auto=format&fit=crop&q=60' },
+    { name: 'Action', count: '1.1K+ Movies', gradient: 'from-red-950/30 to-neutral-950/90', bg: 'https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?w=500&auto=format&fit=crop&q=60' },
+    { name: 'Comedy', count: '1.6K+ Movies', gradient: 'from-amber-950/30 to-neutral-950/90', bg: 'https://images.unsplash.com/photo-1514306191717-452ec28c7814?w=500&auto=format&fit=crop&q=60' },
+    { name: 'Adventure', count: '1.5K+ Movies', gradient: 'from-emerald-950/30 to-neutral-950/90', bg: 'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=500&auto=format&fit=crop&q=60' },
+    { name: 'Sci-Fi', count: '80+ Movies', gradient: 'from-blue-950/30 to-neutral-950/90', bg: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&auto=format&fit=crop&q=60' },
+    { name: 'Animation', count: '380+ Movies', gradient: 'from-pink-950/30 to-neutral-950/90', bg: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500&auto=format&fit=crop&q=60' },
+    { name: 'Horror', count: '1.3K+ Movies', gradient: 'from-purple-950/40 to-neutral-950/90', bg: 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=500&auto=format&fit=crop&q=60' },
   ];
 
   return (
@@ -77,9 +77,9 @@ export default function Home() {
       <div className="hero-bg-glow animate-pulse-slow" />
 
       {/* Hero Section */}
-      <section className="relative max-w-[1440px] mx-auto px-4 md:px-8 pt-8 pb-14 md:py-16 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center z-10 w-full">
+      <section className="relative max-w-[1440px] mx-auto px-4 md:px-8 pt-8 pb-14 md:py-16 grid grid-cols-1 xl:grid-cols-2 gap-10 items-center z-10 w-full">
         {/* Left Column: Heading & Search */}
-        <div className="flex flex-col gap-5 lg:gap-7">
+        <div className="flex flex-col gap-5 xl:gap-7">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.1] md:leading-[1.15]">
             Discover films.<br />
             Track <span className="text-brand-yellow">Ratings</span>.
@@ -124,7 +124,7 @@ export default function Home() {
         </div>
 
         {/* Right Column: Large Featured Movie Card */}
-        <div className="w-full flex items-center justify-center lg:justify-end">
+        <div className="w-full flex items-center justify-center xl:justify-end">
           {featured ? (
             <div className="glass-panel border border-brand-border rounded-2xl p-5 flex flex-col sm:flex-row gap-5 w-full max-w-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
               {/* Poster */}
@@ -271,7 +271,7 @@ export default function Home() {
           {homeGenres.map((genre) => (
             <Link
               key={genre.name}
-              to={`/movies?genre=${genre.name}`}
+              to={`/genres?genre=${genre.name}`}
               className="relative aspect-[16/10] sm:aspect-square rounded-xl overflow-hidden group shadow-md border border-brand-border/40"
             >
               {/* Cover Photo */}
@@ -284,11 +284,11 @@ export default function Home() {
               <div className={`absolute inset-0 bg-gradient-to-t ${genre.gradient} opacity-90 transition-opacity`} />
               
               {/* Text */}
-              <div className="absolute inset-0 p-3.5 flex flex-col justify-end">
-                <span className="text-[15px] font-extrabold text-white group-hover:text-brand-yellow tracking-tight transition-colors duration-200">
+              <div className="absolute inset-0 p-3 sm:p-4 flex flex-col justify-end">
+                <span className="text-sm sm:text-base font-extrabold text-white group-hover:text-brand-yellow tracking-tight transition-colors duration-200">
                   {genre.name}
                 </span>
-                <span className="text-[9px] font-semibold text-brand-gray/80 tracking-widest uppercase mt-0.5">
+                <span className="text-[9px] sm:text-[10px] font-bold text-brand-gray/80 tracking-widest uppercase mt-0.5">
                   {genre.count}
                 </span>
               </div>

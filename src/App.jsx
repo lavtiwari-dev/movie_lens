@@ -13,7 +13,7 @@ export default function App() {
   return (
     <AppProvider>
       <BrowserRouter>
-        <div className="app-root flex flex-col min-h-screen bg-brand-bg text-brand-primary">
+        <div className="app-root flex flex-col min-h-screen bg-brand-bg text-brand-primary overflow-x-hidden">
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />

@@ -47,7 +47,7 @@ export default function Favorites() {
           </div>
 
           {favorites.length > 0 && (
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
               {/* Sort Dropdown */}
               <div className="flex items-center gap-2">
                 <span className="text-[10px] font-bold text-brand-gray uppercase tracking-widest">Sort</span>

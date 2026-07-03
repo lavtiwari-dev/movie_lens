@@ -95,45 +95,52 @@ export default function SearchResults() {
 
             {/* Pagination Controls */}
             {totalPages > 1 && (
-              <div className="flex justify-center items-center gap-2 mt-12">
+              <div className="flex justify-center items-center gap-2 mt-12 w-full">
                 <button
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className="px-4.5 py-2 border border-brand-border rounded-lg text-xs font-semibold text-brand-primary bg-brand-card/50 hover:bg-brand-yellow hover:text-black disabled:opacity-30 disabled:hover:bg-brand-card/50 disabled:hover:text-brand-primary cursor-pointer transition-colors"
+                  className="px-4 py-2 border border-brand-border rounded-lg text-xs font-semibold text-brand-primary bg-brand-card/50 hover:bg-brand-yellow hover:text-black disabled:opacity-30 disabled:hover:bg-brand-card/50 disabled:hover:text-brand-primary cursor-pointer transition-colors"
                 >
                   Previous
                 </button>
                 
-                {/* Numbers */}
-                {Array.from({ length: Math.min(5, totalPages) }, (_, idx) => {
-                  let pageNum = currentPage;
-                  if (currentPage <= 3) {
-                    pageNum = idx + 1;
-                  } else if (currentPage >= totalPages - 2) {
-                    pageNum = totalPages - 4 + idx;
-                  } else {
-                    pageNum = currentPage - 2 + idx;
-                  }
-                  if (pageNum < 1 || pageNum > totalPages) return null;
-                  return (
-                    <button
-                      key={pageNum}
-                      onClick={() => handlePageChange(pageNum)}
-                      className={`w-9 h-9 border rounded-lg text-xs font-semibold flex items-center justify-center cursor-pointer transition-all ${
-                        currentPage === pageNum
-                          ? 'border-brand-yellow text-black bg-brand-yellow font-bold shadow-md'
-                          : 'border-brand-border text-brand-primary bg-brand-card/50 hover:bg-brand-card'
-                      }`}
-                    >
-                      {pageNum}
-                    </button>
-                  );
-                })}
+                {/* Mobile Page indicator */}
+                <span className="sm:hidden text-xs text-brand-gray font-medium px-2">
+                  {currentPage} / {totalPages}
+                </span>
+
+                {/* Numbers for desktop */}
+                <div className="hidden sm:flex items-center gap-2">
+                  {Array.from({ length: Math.min(5, totalPages) }, (_, idx) => {
+                    let pageNum = currentPage;
+                    if (currentPage <= 3) {
+                      pageNum = idx + 1;
+                    } else if (currentPage >= totalPages - 2) {
+                      pageNum = totalPages - 4 + idx;
+                    } else {
+                      pageNum = currentPage - 2 + idx;
+                    }
+                    if (pageNum < 1 || pageNum > totalPages) return null;
+                    return (
+                      <button
+                        key={pageNum}
+                        onClick={() => handlePageChange(pageNum)}
+                        className={`w-9 h-9 border rounded-lg text-xs font-semibold flex items-center justify-center cursor-pointer transition-all ${
+                          currentPage === pageNum
+                            ? 'border-brand-yellow text-black bg-brand-yellow font-bold shadow-md'
+                            : 'border-brand-border text-brand-primary bg-brand-card/50 hover:bg-brand-card'
+                        }`}
+                      >
+                        {pageNum}
+                      </button>
+                    );
+                  })}
+                </div>
 
                 <button
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className="px-4.5 py-2 border border-brand-border rounded-lg text-xs font-semibold text-brand-primary bg-brand-card/50 hover:bg-brand-yellow hover:text-black disabled:opacity-30 disabled:hover:bg-brand-card/50 disabled:hover:text-brand-primary cursor-pointer transition-colors"
+                  className="px-4 py-2 border border-brand-border rounded-lg text-xs font-semibold text-brand-primary bg-brand-card/50 hover:bg-brand-yellow hover:text-black disabled:opacity-30 disabled:hover:bg-brand-card/50 disabled:hover:text-brand-primary cursor-pointer transition-colors"
                 >
                   Next
                 </button>
